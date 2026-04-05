@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaya Budi Education — Where Knowledge Evolves Into Wisdom</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens ───────────────────────────────────── */
+    :root {
+      --ivory:      #F6F4EF;
+      --ivory-dark: #ECEAE4;
+      --charcoal:   #1F1F1F;
+      --charcoal-2: #2E2E2E;
+      --stone:      #B8B2A7;
+      --stone-dark: #8A847A;
+      --olive:      #6E6A4F;
+      --olive-light: rgba(110,106,79,0.12);
+      --brass:      #A08A5B;
+      --divider:    #D8D2C6;
+      --divider-faint: rgba(216,210,198,0.5);
+      --surface:    #EFECEA;
+      --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ─── Reset & Base ────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--ivory);
+      color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ─── Paper Grain ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9990;
+      mix-blend-mode: multiply;
+    }
+
+    /* ─── Typography Scale ────────────────────────────────── */
+    .font-serif  { font-family: 'Playfair Display', Georgia, serif; }
+    .font-sans   { font-family: 'DM Sans', sans-serif; }
+
+    .label-xs {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
+
+    /* ─── Dividers ────────────────────────────────────────── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: var(--divider);
+    }
+
+    .divider-v {
+      width: 1px;
+      background-color: var(--divider);
+    }
+
+    /* ─── Navigation ──────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      background: rgba(246,244,239,0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--divider);
+      padding: 0 7vw;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: height 0.4s var(--ease-out);
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .nav-logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+
+    .nav-logo-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.8rem;
+    }
+
+    .nav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s var(--ease-out);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--olive);
+      transition: width 0.35s var(--ease-out);
+    }
+
+    .nav-link:hover { color: var(--charcoal); }
+    .nav-link:hover::after { width: 100%; }
+
+    .nav-link:focus-visible {
+      outline: 1px solid var(--olive);
+      outline-offset: 4px;
+    }
+
+    .nav-cta-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      border: 1px solid var(--charcoal);
+      padding: 0.5rem 1.3rem;
+      transition: background 0.3s var(--ease-out),
+                  color 0.3s var(--ease-out);
+    }
+
+    .nav-cta-link:hover {
+      background: var(--charcoal);
+      color: var(--ivory);
+    }
+
+    .nav-cta-link:focus-visible {
+      outline: 2px solid var(--charcoal);
+      outline-offset: 2px;
+    }
+
+    .nav-cta-link:active { opacity: 0.8; }
+
+    /* ─── Hero ────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 7vw 80px;
+      position: relative;
+    }
+
+    /* Warm vignette */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(160,138,91,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 40% at 50% 0%,   rgba(216,210,198,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 0.8s var(--ease-out) 0.1s forwards;
+    }
+
+    .hero-rule {
+      width: 2.5rem;
+      height: 1px;
+      background: var(--stone);
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(3.2rem, 7.5vw, 8.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.9s var(--ease-out) 0.25s forwards;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--charcoal-2);
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 3.5rem;
+      background: linear-gradient(to bottom, var(--divider), transparent);
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease-out) 0.45s forwards;
+    }
+
+    .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+      letter-spacing: 0.04em;
+      color: var(--stone-dark);
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.85;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 0.8s var(--ease-out) 0.55s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: fadeUp 0.8s var(--ease-out) 0.75s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      background: var(--charcoal);
+      border: 1px solid var(--charcoal);
+      padding: 0.9rem 2.2rem;
+      text-decoration: none;
+      transition: opacity 0.3s var(--ease-out),
+                  background 0.3s var(--ease-out);
+    }
+
+    .btn-primary:hover { opacity: 0.78; }
+    .btn-primary:focus-visible { outline: 2px solid var(--charcoal); outline-offset: 3px; }
+    .btn-primary:active { opacity: 0.65; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      background: transparent;
+      border: 1px solid var(--divider);
+      padding: 0.9rem 2.2rem;
+      text-decoration: none;
+      transition: border-color 0.3s var(--ease-out),
+                  color 0.3s var(--ease-out);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--charcoal);
+      color: var(--charcoal);
+    }
+
+    .btn-ghost:focus-visible { outline: 1px solid var(--charcoal); outline-offset: 3px; }
+    .btn-ghost:active { opacity: 0.7; }
+
+    /* Scroll indicator */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease-out) 1.2s forwards;
+    }
+
+    .scroll-cue-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--divider));
+      animation: scrollDrop 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollDrop {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+      40%  { transform: scaleY(1); opacity: 1; }
+      100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* ─── Keyframes ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Scroll Reveal ───────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.75s var(--ease-out),
+                  transform 0.75s var(--ease-out);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.18s; }
+    .reveal-d3 { transition-delay: 0.28s; }
+    .reveal-d4 { transition-delay: 0.38s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+
+    /* ─── Section Base ────────────────────────────────────── */
+    .section {
+      padding: 7.5rem 7vw;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 4.5rem;
+    }
+
+    .section-label .divider { max-width: 2rem; }
+
+    /* ─── Positioning ─────────────────────────────────────── */
+    #positioning {
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      background: var(--ivory);
+    }
+
+    .pos-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .pos-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 3.8vw, 4rem);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      color: var(--charcoal);
+    }
+
+    .pos-headline em {
+      font-style: italic;
+    }
+
+    .pos-body {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--divider);
+    }
+
+    .pillar {
+      padding: 1.2rem 1.4rem;
+      border-right: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      transition: background 0.3s var(--ease-out);
+    }
+
+    .pillar:nth-child(even) { border-right: none; }
+    .pillar:nth-child(3),
+    .pillar:nth-child(4) { border-bottom: none; }
+
+    .pillar:hover { background: var(--surface); }
+
+    .pillar-num {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--stone);
+      margin-bottom: 0.4rem;
+    }
+
+    .pillar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    /* ─── Philosophy ──────────────────────────────────────── */
+    #philosophy {
+      background: var(--surface);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .philosophy-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .phil-col {
+      padding: 3.5rem 3rem;
+      border-right: 1px solid var(--divider);
+      transition: background 0.35s var(--ease-out);
+      cursor: default;
+    }
+
+    .phil-col:last-child { border-right: none; }
+    .phil-col:hover { background: var(--ivory-dark); }
+
+    .phil-numeral {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 4.5rem;
+      font-weight: 400;
+      color: rgba(184,178,167,0.35);
+      line-height: 1;
+      margin-bottom: 2rem;
+      transition: color 0.35s var(--ease-out);
+    }
+
+    .phil-col:hover .phil-numeral { color: rgba(110,106,79,0.2); }
+
+    .phil-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .phil-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.85;
+    }
+
+    /* ─── About ───────────────────────────────────────────── */
+    #about {
+      background: var(--ivory);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      align-items: center;
+    }
+
+    .about-left-number {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(5rem, 9vw, 10rem);
+      font-weight: 400;
+      color: rgba(216,210,198,0.5);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-body {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.95;
+      margin-bottom: 2rem;
+    }
+
+    .audience-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .audience-chip {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      border: 1px solid var(--divider);
+      padding: 0.35rem 0.85rem;
+      background: var(--ivory);
+    }
+
+    /* Right side editorial block */
+    .about-right {
+      position: relative;
+    }
+
+    .about-right-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.3;
+      border-left: 2px solid var(--olive);
+      padding-left: 2rem;
+    }
+
+    .about-right-sub {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--stone);
+      line-height: 1.85;
+      margin-top: 2rem;
+      padding-left: 2rem;
+    }
+
+    /* ─── Programmes ──────────────────────────────────────── */
+    #programmes {
+      background: var(--surface);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .prog-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--divider);
+    }
+
+    .prog-card {
+      padding: 2.5rem 2rem 3rem;
+      border-right: 1px solid var(--divider);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s var(--ease-out);
+      cursor: default;
+    }
+
+    .prog-card:last-child { border-right: none; }
+
+    .prog-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--olive);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s var(--ease-out);
+    }
+
+    .prog-card:hover { background: var(--ivory); }
+    .prog-card:hover::before { transform: scaleX(1); }
+
+    .prog-num {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--stone);
+      margin-bottom: 2.5rem;
+    }
+
+    .prog-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .prog-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.8;
+    }
+
+    .prog-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.3s var(--ease-out),
+                  transform 0.3s var(--ease-out);
+    }
+
+    .prog-card:hover .prog-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── Apart ───────────────────────────────────────────── */
+    #apart {
+      background: var(--ivory);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .apart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .apart-row {
+      display: grid;
+      grid-template-columns: 3.5rem 1fr 2fr;
+      gap: 2.5rem;
+      align-items: baseline;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--divider-faint);
+      transition: background 0.3s var(--ease-out);
+    }
+
+    .apart-row:first-child { border-top: 1px solid var(--divider-faint); }
+    .apart-row:hover { background: var(--surface); margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+
+    .apart-index {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--stone);
+    }
+
+    .apart-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.3;
+    }
+
+    .apart-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.85;
+    }
+
+    /* ─── Vision & Mission ────────────────────────────────── */
+    #vision {
+      background: var(--surface);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .vm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .vm-col-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 2rem;
+    }
+
+    .vm-headline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+
+    .vm-body {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 1.9;
+    }
+
+    .mission-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .mission-items li {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      display: grid;
+      grid-template-columns: 1rem 1fr;
+      gap: 0.8rem;
+      line-height: 1.7;
+    }
+
+    .mission-items li::before {
+      content: '—';
+      color: var(--olive);
+      font-weight: 400;
+    }
+
+    /* ─── Signature ───────────────────────────────────────── */
+    #signature {
+      background: var(--charcoal);
+      padding: 8rem 7vw;
+      text-align: center;
+    }
+
+    .sig-kicker {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 3rem;
+    }
+
+    .sig-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.8rem, 4vw, 4.5rem);
+      line-height: 1.22;
+      color: var(--ivory);
+      max-width: 950px;
+      margin: 0 auto;
+      letter-spacing: -0.01em;
+    }
+
+    .sig-quote .emphasis {
+      color: var(--brass);
+    }
+
+    .sig-rule {
+      width: 2.5rem;
+      height: 1px;
+      background: rgba(216,210,198,0.25);
+      margin: 3rem auto 0;
+    }
+
+    /* ─── Contact / Footer ────────────────────────────────── */
+    #contact {
+      background: var(--ivory);
+      border-top: 1px solid var(--divider);
+      padding: 6rem 7vw 3rem;
+    }
+
+    .contact-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--charcoal);
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-brand-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--stone-dark);
+      line-height: 1.65;
+      max-width: 260px;
+    }
+
+    .footer-col-head {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--stone-dark);
+      line-height: 2.1;
+    }
+
+    .footer-col-body a {
+      color: var(--stone-dark);
+      text-decoration: none;
+      transition: color 0.25s var(--ease-out);
+    }
+
+    .footer-col-body a:hover { color: var(--charcoal); }
+    .footer-col-body a:focus-visible {
+      outline: 1px solid var(--olive);
+      outline-offset: 2px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--stone);
+    }
+
+    /* ─── Mobile ──────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .prog-grid { grid-template-columns: repeat(2, 1fr); }
+      .prog-card:nth-child(2) { border-right: none; }
+      .prog-card:nth-child(1),
+      .prog-card:nth-child(2) { border-bottom: 1px solid var(--divider); }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links .nav-link { display: none; }
+      .section { padding: 5rem 5vw; }
+
+      .pos-grid,
+      .about-grid,
+      .vm-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .vm-grid .divider-v { display: none; }
+
+      .philosophy-cols { grid-template-columns: 1fr; }
+      .phil-col { border-right: none; border-bottom: 1px solid var(--divider); }
+      .phil-col:last-child { border-bottom: none; }
+
+      .apart-row { grid-template-columns: 2.5rem 1fr; gap: 1.2rem; }
+      .apart-desc { grid-column: 2; }
+
+      .contact-top { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 640px) {
+      .prog-grid { grid-template-columns: 1fr; }
+      .prog-card { border-right: none; border-bottom: 1px solid var(--divider); }
+      .prog-card:last-child { border-bottom: none; }
+
+      .hero-headline { font-size: clamp(2.8rem, 12vw, 4rem); }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { text-align: center; justify-content: center; }
+
+      .pillars { grid-template-columns: 1fr; }
+      .pillar:nth-child(even) { border-right: 1px solid var(--divider); }
+      .pillar:nth-child(3) { border-bottom: 1px solid var(--divider); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ NAVIGATION ════════════════════════════════════════ -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <a href="#hero" class="nav-logo" aria-label="Jaya Budi Education home">
+      <div class="nav-logo-name">Jaya Budi</div>
+      <div class="nav-logo-sub">Education</div>
+    </a>
+    <div class="nav-links">
+      <a href="#philosophy" class="nav-link">Philosophy</a>
+      <a href="#programmes" class="nav-link">Programmes</a>
+      <a href="#about"      class="nav-link">About</a>
+      <a href="#contact"    class="nav-cta-link">Connect</a>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════ -->
+  <section id="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+
+      <div class="hero-eyebrow">
+        <div class="hero-rule" aria-hidden="true"></div>
+        <span class="label-xs">Est. 2025 · Kuala Lumpur</span>
+        <div class="hero-rule" aria-hidden="true"></div>
+      </div>
+
+      <h1 id="hero-title" class="hero-headline">
+        Where Knowledge<br>
+        <em>Evolves Into Wisdom.</em>
+      </h1>
+
+      <div class="hero-divider" aria-hidden="true"></div>
+
+      <p class="hero-sub">
+        We cultivate decision-makers, value creators, and leaders for an uncertain world.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#programmes" class="btn-primary">
+          Explore Our Programs
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
+            <path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn-ghost">Begin Your Journey</a>
+      </div>
+
+    </div>
+    <div class="scroll-cue" aria-hidden="true">
+      <div class="scroll-cue-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ BRAND POSITIONING ════════════════════════════════ -->
+  <section id="positioning" class="section" aria-labelledby="pos-title">
+    <div class="section-label reveal">
+      <div class="divider" style="max-width:2rem;"></div>
+      <span class="label-xs">Our Positioning</span>
+    </div>
+
+    <div class="pos-grid">
+      <div class="reveal reveal-d1">
+        <h2 id="pos-title" class="pos-headline">
+          <em>Not Just Education.</em><br>
+          A System of<br>Thinking.
+        </h2>
+      </div>
+
+      <div class="reveal reveal-d2">
+        <p class="pos-body">
+          In a world overwhelmed by information, the true advantage lies in understanding — how to think, decide, and create value. We are not a traditional education provider. We design systems that shape how individuals perceive the world, make decisions, and build sustainable success.
+        </p>
+        <p class="pos-body" style="margin-bottom: 2rem;">Our work sits at the intersection of:</p>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pillar-num">01</div>
+            <div class="pillar-title">Human Nature</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-num">02</div>
+            <div class="pillar-title">Strategic Thinking</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-num">03</div>
+            <div class="pillar-title">Value Creation</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-num">04</div>
+            <div class="pillar-title">Long-term Decision Frameworks</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PHILOSOPHY ════════════════════════════════════════ -->
+  <section id="philosophy" class="section" aria-labelledby="phil-title">
+    <div class="section-label reveal">
+      <div class="divider" style="max-width:2rem;"></div>
+      <span class="label-xs" id="phil-title">Core Philosophy</span>
+    </div>
+
+    <div class="philosophy-cols">
+      <div class="phil-col reveal reveal-d1">
+        <div class="phil-numeral" aria-hidden="true">I</div>
+        <h3 class="phil-title">Lifelong Learning</h3>
+        <p class="phil-desc">Growth is not an event — it is continuous and evolving. We build frameworks that sustain curiosity and adaptation across every stage of life.</p>
+      </div>
+      <div class="phil-col reveal reveal-d2">
+        <div class="phil-numeral" aria-hidden="true">II</div>
+        <h3 class="phil-title">Uplifting Humanity</h3>
+        <p class="phil-desc">Education should elevate individuals and the communities they serve. We hold ourselves accountable not just to our students, but to the world they shape.</p>
+      </div>
+      <div class="phil-col reveal reveal-d3">
+        <div class="phil-numeral" aria-hidden="true">III</div>
+        <h3 class="phil-title">Continuing Wisdom</h3>
+        <p class="phil-desc">We bridge timeless wisdom with modern knowledge — honouring what endures while integrating what is emerging, so our students carry both forward.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═════════════════════════════════════════════ -->
+  <section id="about" class="section" aria-labelledby="about-title">
+    <div class="section-label reveal">
+      <div class="divider" style="max-width:2rem;"></div>
+      <span class="label-xs">Who We Are</span>
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <div class="about-left-number reveal" aria-hidden="true">01</div>
+        <h2 id="about-title" class="about-tagline reveal reveal-d1">
+          A High-Level Education & Advisory Institution Dedicated to Human Potential.
+        </h2>
+        <p class="about-body reveal reveal-d2">
+          We focus on cultivating clarity, judgment, and the capacity to navigate complexity. We don't simply teach knowledge — we engineer the conditions for wisdom to emerge in those ready to receive it.
+        </p>
+        <p class="about-body reveal reveal-d3">We work with those who take their development seriously:</p>
+        <div class="audience-row reveal reveal-d4">
+          <span class="audience-chip">Entrepreneurs</span>
+          <span class="audience-chip">Leaders</span>
+          <span class="audience-chip">Professionals</span>
+          <span class="audience-chip">Next-Generation Talents</span>
+        </div>
+      </div>
+
+      <div class="about-right reveal reveal-d2">
+        <blockquote class="about-right-quote">
+          "We do not simply teach knowledge — we engineer the conditions for wisdom to emerge."
+        </blockquote>
+        <p class="about-right-sub">
+          Our institution exists at the intersection of intellectual rigour and human depth. We believe that the highest form of education is one that changes not just what you know, but how you see.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROGRAMMES ════════════════════════════════════════ -->
+  <section id="programmes" class="section" aria-labelledby="prog-title">
+    <div class="section-label reveal">
+      <div class="divider" style="max-width:2rem;"></div>
+      <span class="label-xs" id="prog-title">Our Programmes</span>
+    </div>
+
+    <div class="prog-grid">
+      <div class="prog-card reveal reveal-d1">
+        <div class="prog-num">01</div>
+        <h3 class="prog-title">Foundational Programmes</h3>
+        <p class="prog-desc">Core frameworks for first-principles thinking, mental models, and decision literacy.</p>
+        <div class="prog-arrow" aria-hidden="true">
+          Enquire
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+            <path d="M1 4h10M7 1l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="prog-card reveal reveal-d2">
+        <div class="prog-num">02</div>
+        <h3 class="prog-title">Advanced Programmes</h3>
+        <p class="prog-desc">Deep-dive mastery in strategy, value creation, and complex judgement under uncertainty.</p>
+        <div class="prog-arrow" aria-hidden="true">
+          Enquire
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+            <path d="M1 4h10M7 1l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="prog-card reveal reveal-d3">
+        <div class="prog-num">03</div>
+        <h3 class="prog-title">Executive & Leadership Programmes</h3>
+        <p class="prog-desc">For senior leaders navigating scale, uncertainty, and long-horizon decisions.</p>
+        <div class="prog-arrow" aria-hidden="true">
+          Enquire
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+            <path d="M1 4h10M7 1l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="prog-card reveal reveal-d4">
+        <div class="prog-num">04</div>
+        <h3 class="prog-title">Youth & Next-Generation Programmes</h3>
+        <p class="prog-desc">Building tomorrow's thinkers — before the world shapes them otherwise.</p>
+        <div class="prog-arrow" aria-hidden="true">
+          Enquire
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+            <path d="M1 4h10M7 1l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHAT SETS US APART ════════════════════════════════ -->
+  <section id="apart" class="section" aria-labelledby="apart-title">
+    <div class="section-label reveal">
+      <div class="divider" style="max-width:2rem;"></div>
+      <span class="label-xs" id="apart-title">What Sets Us Apart</span>
+    </div>
+
+    <div class="apart-list">
+      <div class="apart-row reveal reveal-d1">
+        <span class="apart-index">01</span>
+        <h3 class="apart-title">Principles, Not Content</h3>
+        <p class="apart-desc">We teach the underlying logic of how things work — not facts to memorise, but principles to apply across any domain, at any scale, in any era.</p>
+      </div>
+      <div class="apart-row reveal reveal-d2">
+        <span class="apart-index">02</span>
+        <h3 class="apart-title">Decision-Making as a Core Discipline</h3>
+        <p class="apart-desc">Every programme is architected around improving the quality of decisions — the single most consequential lever in any life, career, or organisation.</p>
+      </div>
+      <div class="apart-row reveal reveal-d3">
+        <span class="apart-index">03</span>
+        <h3 class="apart-title">Non-Depreciating Capabilities</h3>
+        <p class="apart-desc">We build capabilities that compound over time and never become obsolete — wisdom, judgment, and clarity of thinking are the only true durable assets.</p>
+      </div>
+      <div class="apart-row reveal reveal-d4">
+        <span class="apart-index">04</span>
+        <h3 class="apart-title">Wisdom Integrated with Modern Frameworks</h3>
+        <p class="apart-desc">Timeless insight woven with contemporary frameworks — so you carry the best of both into an uncertain future that demands more than knowledge alone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ VISION & MISSION ══════════════════════════════════ -->
+  <section id="vision" class="section" aria-labelledby="vision-title">
+    <div class="section-label reveal">
+      <div class="divider" style="max-width:2rem;"></div>
+      <span class="label-xs">Vision &amp; Mission</span>
+    </div>
+
+    <div class="vm-grid">
+      <div class="reveal reveal-d1">
+        <div class="vm-col-label">Vision</div>
+        <h2 id="vision-title" class="vm-headline">
+          To shape a future where individuals think clearly and act wisely.
+        </h2>
+        <p class="vm-body">
+          We measure our success not by enrolment numbers or examination results, but by the quality of decisions our graduates make — and the lives those decisions build over time.
+        </p>
+      </div>
+
+      <div class="divider-v reveal reveal-d2"></div>
+
+      <div class="reveal reveal-d3">
+        <div class="vm-col-label">Mission</div>
+        <ul class="mission-items">
+          <li>Cultivate lifelong learners who grow beyond any single programme</li>
+          <li>Elevate human potential through structured, principled education</li>
+          <li>Integrate timeless wisdom with modern knowledge frameworks</li>
+          <li>Empower individuals to make better decisions at every scale</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SIGNATURE STATEMENT ═══════════════════════════════ -->
+  <section id="signature" aria-label="Signature statement">
+    <div class="reveal">
+      <p class="sig-kicker">Our Commitment</p>
+      <blockquote class="sig-quote">
+        "We do not prepare people for exams. We prepare them for <span class="emphasis">life, decisions,</span> and reality."
+      </blockquote>
+      <div class="sig-rule" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT / FOOTER ══════════════════════════════════ -->
+  <footer id="contact" aria-label="Contact and footer information">
+    <div class="contact-top">
+      <div class="reveal reveal-d1">
+        <div class="footer-brand-name">Jaya Budi</div>
+        <div class="footer-brand-sub">Education Sdn. Bhd.</div>
+        <p class="footer-tagline">Not Just Education.<br>A System of Thinking.</p>
+      </div>
+
+      <div class="reveal reveal-d2">
+        <div class="footer-col-head">Connect</div>
+        <div class="footer-col-body">
+          <a href="mailto:info@yourcompany.com">info@yourcompany.com</a><br>
+          <a href="tel:+6500000000">+65 XXXX XXXX</a>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d3">
+        <div class="footer-col-head">Registered In</div>
+        <div class="footer-col-body">
+          Kuala Lumpur, Malaysia<br>
+          Reg. No. 202501056407<br>
+          (1657813-M)
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Jaya Budi Education Sdn. Bhd. All rights reserved.</span>
+      <span class="footer-copy">202501056407 (1657813-M)</span>
+    </div>
+  </footer>
+
+  <!-- ═══ JAVASCRIPT ════════════════════════════════════════ -->
+  <script>
+    // ── Scroll Reveal via IntersectionObserver ───────────
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    reveals.forEach(el => io.observe(el));
+
+    // ── Smooth anchor scroll ─────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = 64; // nav height
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
