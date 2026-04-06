@@ -160,6 +160,80 @@
       outline-offset: 4px;
     }
 
+    /* ─── Globe Language Switcher ─────────────────────────── */
+    .lang-globe-wrap {
+      position: relative;
+    }
+
+    .lang-globe-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--stone-dark);
+      padding: 0.2rem 0;
+      transition: color 0.25s var(--ease-out);
+    }
+
+    .lang-globe-btn:hover { color: var(--charcoal); }
+
+    .lang-globe-current {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+    }
+
+    .lang-globe-caret {
+      transition: transform 0.25s var(--ease-out);
+    }
+
+    .lang-globe-btn[aria-expanded="true"] .lang-globe-caret {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 0.6rem);
+      right: 0;
+      background: var(--ivory);
+      border: 1px solid var(--divider);
+      min-width: 110px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .lang-dropdown.open { display: flex; }
+
+    .lang-dropdown-item {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--stone-dark);
+      text-decoration: none;
+      padding: 0.65rem 1rem;
+      transition: background 0.2s, color 0.2s;
+      cursor: default;
+    }
+
+    a.lang-dropdown-item {
+      cursor: pointer;
+    }
+
+    a.lang-dropdown-item:hover {
+      background: var(--surface);
+      color: var(--charcoal);
+    }
+
+    .lang-dropdown-active {
+      color: var(--olive);
+      font-weight: 500;
+    }
+
     .nav-cta-link {
       font-family: 'DM Sans', sans-serif;
       font-size: 0.65rem;
@@ -1001,10 +1075,21 @@
       <a href="#philosophy" class="nav-link">Philosophy</a>
       <a href="#programmes" class="nav-link">Programmes</a>
       <a href="#about"      class="nav-link">About</a>
-      <div style="display:flex;align-items:center;gap:0.4rem;">
-        <span style="font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;color:var(--olive);">EN</span>
-        <span style="color:var(--divider);font-size:0.72rem;">|</span>
-        <a href="index-zh.html" style="font-family:'Noto Sans SC',sans-serif;font-size:0.65rem;font-weight:400;letter-spacing:0.05em;color:var(--stone-dark);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--charcoal)'" onmouseout="this.style.color='var(--stone-dark)'">中文</a>
+      <div class="lang-globe-wrap" id="langWrap">
+        <button class="lang-globe-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Select language">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span class="lang-globe-current">EN</span>
+          <svg class="lang-globe-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <span class="lang-dropdown-item lang-dropdown-active" role="menuitem">English</span>
+          <a href="index-zh.html" class="lang-dropdown-item" role="menuitem">中文</a>
+        </div>
       </div>
       <a href="#contact"    class="nav-cta-link">Connect</a>
     </div>
@@ -1341,6 +1426,19 @@
           window.scrollTo({ top, behavior: 'smooth' });
         }
       });
+    });
+
+    // Globe language dropdown
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = langDropdown.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', () => {
+      langDropdown.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
     });
   </script>
 

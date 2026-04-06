@@ -161,35 +161,83 @@
     .nav-link:hover::after { width: 100%; }
     .nav-link:focus-visible { outline: 1px solid var(--olive); outline-offset: 4px; }
 
-    /* Language toggle */
-    .lang-toggle {
+    /* ─── Globe Language Switcher ─────────────────────────── */
+    .lang-globe-wrap {
+      position: relative;
+    }
+
+    .lang-globe-btn {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      text-decoration: none;
+      gap: 0.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--stone-dark);
+      padding: 0.2rem 0;
+      transition: color 0.25s var(--ease-out);
     }
 
-    .lang-en {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      color: var(--stone);
-    }
+    .lang-globe-btn:hover { color: var(--charcoal); }
 
-    .lang-zh {
+    .lang-globe-current {
       font-family: 'Noto Sans SC', sans-serif;
       font-size: 0.65rem;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: 0.05em;
-      color: var(--stone);
     }
 
-    .lang-active-en { color: var(--olive); font-weight: 500; }
-    .lang-active-zh { color: var(--olive); font-weight: 500; }
+    .lang-globe-caret {
+      transition: transform 0.25s var(--ease-out);
+    }
 
-    .lang-sep {
-      color: var(--divider);
+    .lang-globe-btn[aria-expanded="true"] .lang-globe-caret {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 0.6rem);
+      right: 0;
+      background: var(--ivory);
+      border: 1px solid var(--divider);
+      min-width: 110px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .lang-dropdown.open { display: flex; }
+
+    .lang-dropdown-item {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--stone-dark);
+      text-decoration: none;
+      padding: 0.65rem 1rem;
+      transition: background 0.2s, color 0.2s;
+      cursor: default;
+    }
+
+    .lang-dropdown-item:first-child {
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.1em;
+    }
+
+    .lang-dropdown-item:last-child {
+      font-family: 'Noto Sans SC', sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    a.lang-dropdown-item { cursor: pointer; }
+    a.lang-dropdown-item:hover {
+      background: var(--surface);
+      color: var(--charcoal);
+    }
+
+    .lang-dropdown-active {
+      color: var(--olive);
+      font-weight: 500;
     }
 
     .nav-cta-link {
@@ -1017,10 +1065,21 @@
       <a href="#philosophy" class="nav-link">理念</a>
       <a href="#programmes" class="nav-link">方案</a>
       <a href="#about"      class="nav-link">关于</a>
-      <div class="lang-toggle">
-        <a href="index.html" class="lang-en" style="text-decoration:none;">EN</a>
-        <span class="lang-sep">|</span>
-        <span class="lang-zh lang-active-zh">中文</span>
+      <div class="lang-globe-wrap" id="langWrap">
+        <button class="lang-globe-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="选择语言">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span class="lang-globe-current">中文</span>
+          <svg class="lang-globe-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <a href="index.html" class="lang-dropdown-item" role="menuitem">English</a>
+          <span class="lang-dropdown-item lang-dropdown-active" role="menuitem">中文</span>
+        </div>
       </div>
       <a href="#contact" class="nav-cta-link">联系</a>
     </div>
@@ -1357,6 +1416,19 @@
           window.scrollTo({ top, behavior: 'smooth' });
         }
       });
+    });
+
+    // Globe language dropdown
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = langDropdown.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', () => {
+      langDropdown.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
     });
   </script>
 
