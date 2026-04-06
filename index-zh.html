@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jaya Budi Education — Where Knowledge Evolves Into Wisdom</title>
+  <title>佳宝教育 — 让知识沉淀为智慧</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
 
   <style>
     /* ─── Design Tokens ───────────────────────────────────── */
@@ -38,9 +38,9 @@
     body {
       background-color: var(--ivory);
       color: var(--charcoal);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
       font-weight: 300;
-      line-height: 1.7;
+      line-height: 2.0;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -58,16 +58,22 @@
       mix-blend-mode: multiply;
     }
 
+    /* ─── Chinese Typography Overrides ───────────────────── */
+    h1, h2, h3 {
+      font-family: 'Noto Serif SC', 'Playfair Display', serif;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+    }
+
     /* ─── Typography Scale ────────────────────────────────── */
-    .font-serif  { font-family: 'Playfair Display', Georgia, serif; }
-    .font-sans   { font-family: 'DM Sans', sans-serif; }
+    .font-serif  { font-family: 'Noto Serif SC', serif; }
+    .font-sans   { font-family: 'Noto Sans SC', sans-serif; }
 
     .label-xs {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;   /* reduced — Chinese doesn't need 0.22em */
       color: var(--olive);
     }
 
@@ -117,11 +123,10 @@
     }
 
     .nav-logo-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.55rem;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.52rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
       color: var(--stone-dark);
     }
 
@@ -132,11 +137,10 @@
     }
 
     .nav-link {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.68rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.78rem;
       font-weight: 400;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      letter-spacing: 0.06em;
       color: var(--stone-dark);
       text-decoration: none;
       position: relative;
@@ -154,18 +158,35 @@
 
     .nav-link:hover { color: var(--charcoal); }
     .nav-link:hover::after { width: 100%; }
+    .nav-link:focus-visible { outline: 1px solid var(--olive); outline-offset: 4px; }
 
-    .nav-link:focus-visible {
-      outline: 1px solid var(--olive);
-      outline-offset: 4px;
+    /* Language toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--stone);
+      text-decoration: none;
+    }
+
+    .lang-toggle .lang-active {
+      color: var(--olive);
+      font-weight: 500;
+    }
+
+    .lang-sep {
+      color: var(--divider);
     }
 
     .nav-cta-link {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       color: var(--charcoal);
       text-decoration: none;
       border: 1px solid var(--charcoal);
@@ -174,16 +195,8 @@
                   color 0.3s var(--ease-out);
     }
 
-    .nav-cta-link:hover {
-      background: var(--charcoal);
-      color: var(--ivory);
-    }
-
-    .nav-cta-link:focus-visible {
-      outline: 2px solid var(--charcoal);
-      outline-offset: 2px;
-    }
-
+    .nav-cta-link:hover { background: var(--charcoal); color: var(--ivory); }
+    .nav-cta-link:focus-visible { outline: 2px solid var(--charcoal); outline-offset: 2px; }
     .nav-cta-link:active { opacity: 0.8; }
 
     /* ─── Hero ────────────────────────────────────────────── */
@@ -198,14 +211,24 @@
       position: relative;
     }
 
-    /* Warm vignette */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 55% 45% at 50% 52%,
+        rgba(160,138,91,0.055) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
     #hero::after {
       content: '';
       position: absolute;
       inset: 0;
       background:
         radial-gradient(ellipse 60% 50% at 50% 100%, rgba(160,138,91,0.05) 0%, transparent 70%),
-        radial-gradient(ellipse 80% 40% at 50% 0%,   rgba(216,210,198,0.15) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 40% at 50% 0%,   rgba(216,210,198,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 30% at 50% 50%,  rgba(246,244,239,0.2) 0%, transparent 100%);
       pointer-events: none;
     }
 
@@ -220,7 +243,7 @@
       align-items: center;
       justify-content: center;
       gap: 1.2rem;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
       opacity: 0;
       transform: translateY(10px);
       animation: fadeUp 0.8s var(--ease-out) 0.1s forwards;
@@ -233,41 +256,43 @@
     }
 
     .hero-headline {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(3.2rem, 7.5vw, 8.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 6rem);
+      line-height: 1.3;
+      letter-spacing: 0.08em;
       color: var(--charcoal);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(14px);
       animation: fadeUp 0.9s var(--ease-out) 0.25s forwards;
     }
 
-    .hero-headline em {
-      font-style: italic;
-      color: var(--charcoal-2);
+    .hero-headline .zh-italic {
+      font-style: normal;
+      color: var(--stone-dark);
+      font-weight: 200;
     }
 
     .hero-divider {
       width: 1px;
-      height: 3.5rem;
+      height: 4rem;
       background: linear-gradient(to bottom, var(--divider), transparent);
-      margin: 0 auto 2.5rem;
+      margin: 0 auto 3rem;
       opacity: 0;
       animation: fadeUp 0.7s var(--ease-out) 0.45s forwards;
     }
 
     .hero-sub {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Noto Sans SC', sans-serif;
       font-weight: 300;
-      font-size: clamp(0.9rem, 1.3vw, 1.1rem);
-      letter-spacing: 0.04em;
+      font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+      letter-spacing: 0.08em;
       color: var(--stone-dark);
-      max-width: 500px;
-      margin: 0 auto 3rem;
-      line-height: 1.85;
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+      line-height: 2.0;
+      text-wrap: balance;
       opacity: 0;
       transform: translateY(10px);
       animation: fadeUp 0.8s var(--ease-out) 0.55s forwards;
@@ -288,11 +313,10 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       color: var(--ivory);
       background: var(--charcoal);
       border: 1px solid var(--charcoal);
@@ -309,11 +333,10 @@
     .btn-ghost {
       display: inline-flex;
       align-items: center;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.68rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem;
       font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      letter-spacing: 0.06em;
       color: var(--stone-dark);
       background: transparent;
       border: 1px solid var(--divider);
@@ -323,15 +346,10 @@
                   color 0.3s var(--ease-out);
     }
 
-    .btn-ghost:hover {
-      border-color: var(--charcoal);
-      color: var(--charcoal);
-    }
-
+    .btn-ghost:hover { border-color: var(--charcoal); color: var(--charcoal); }
     .btn-ghost:focus-visible { outline: 1px solid var(--charcoal); outline-offset: 3px; }
     .btn-ghost:active { opacity: 0.7; }
 
-    /* Scroll indicator */
     .scroll-cue {
       position: absolute;
       bottom: 2.5rem;
@@ -358,9 +376,31 @@
       100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
     }
 
-    /* ─── Keyframes ───────────────────────────────────────── */
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    .scroll-label {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--stone);
+    }
+
+    .hero-edition {
+      position: absolute;
+      bottom: 3.5rem;
+      right: 7vw;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--stone);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease-out) 1.4s forwards;
     }
 
     /* ─── Scroll Reveal ───────────────────────────────────── */
@@ -371,11 +411,7 @@
                   transform 0.75s var(--ease-out);
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-d1 { transition-delay: 0.08s; }
     .reveal-d2 { transition-delay: 0.18s; }
     .reveal-d3 { transition-delay: 0.28s; }
@@ -383,9 +419,7 @@
     .reveal-d5 { transition-delay: 0.5s; }
 
     /* ─── Section Base ────────────────────────────────────── */
-    .section {
-      padding: 7.5rem 7vw;
-    }
+    .section { padding: 7.5rem 7vw; }
 
     .section-label {
       display: flex;
@@ -411,23 +445,19 @@
     }
 
     .pos-headline {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Serif SC', serif;
       font-weight: 400;
-      font-size: clamp(2rem, 3.8vw, 4rem);
-      line-height: 1.12;
-      letter-spacing: -0.01em;
+      font-size: clamp(1.8rem, 3.5vw, 3.8rem);
+      line-height: 1.45;
+      letter-spacing: 0.04em;
       color: var(--charcoal);
-    }
-
-    .pos-headline em {
-      font-style: italic;
     }
 
     .pos-body {
       font-size: 0.92rem;
       font-weight: 300;
       color: var(--stone-dark);
-      line-height: 1.9;
+      line-height: 2.1;
       margin-bottom: 2.5rem;
     }
 
@@ -448,7 +478,6 @@
     .pillar:nth-child(even) { border-right: none; }
     .pillar:nth-child(3),
     .pillar:nth-child(4) { border-bottom: none; }
-
     .pillar:hover { background: var(--surface); }
 
     .pillar-num {
@@ -461,10 +490,11 @@
     }
 
     .pillar-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Serif SC', serif;
       font-size: 0.95rem;
       font-weight: 500;
       color: var(--charcoal);
+      letter-spacing: 0.04em;
     }
 
     /* ─── Philosophy ──────────────────────────────────────── */
@@ -503,19 +533,20 @@
     .phil-col:hover .phil-numeral { color: rgba(110,106,79,0.2); }
 
     .phil-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.15rem;
       font-weight: 500;
       color: var(--charcoal);
       margin-bottom: 1rem;
-      line-height: 1.3;
+      line-height: 1.5;
+      letter-spacing: 0.04em;
     }
 
     .phil-desc {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 300;
       color: var(--stone-dark);
-      line-height: 1.85;
+      line-height: 2.0;
     }
 
     /* ─── About ───────────────────────────────────────────── */
@@ -542,11 +573,12 @@
     }
 
     .about-tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2.5rem);
       font-weight: 400;
       color: var(--charcoal);
-      line-height: 1.25;
+      line-height: 1.6;
+      letter-spacing: 0.03em;
       margin-bottom: 1.5rem;
     }
 
@@ -554,49 +586,41 @@
       font-size: 0.9rem;
       font-weight: 300;
       color: var(--stone-dark);
-      line-height: 1.95;
+      line-height: 2.1;
       margin-bottom: 2rem;
     }
 
-    .audience-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    .audience-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
     .audience-chip {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
       color: var(--stone-dark);
       border: 1px solid var(--divider);
       padding: 0.35rem 0.85rem;
       background: var(--ivory);
     }
 
-    /* Right side editorial block */
-    .about-right {
-      position: relative;
-    }
+    .about-right { position: relative; }
 
     .about-right-quote {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.4rem, 2.4vw, 2.4rem);
       font-weight: 400;
       color: var(--charcoal);
-      line-height: 1.3;
+      line-height: 1.65;
+      letter-spacing: 0.03em;
       border-left: 2px solid var(--olive);
       padding-left: 2rem;
     }
 
     .about-right-sub {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 300;
       color: var(--stone);
-      line-height: 1.85;
+      line-height: 2.0;
       margin-top: 2rem;
       padding-left: 2rem;
     }
@@ -649,29 +673,30 @@
     }
 
     .prog-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.05rem;
       font-weight: 500;
       color: var(--charcoal);
-      line-height: 1.3;
+      line-height: 1.6;
+      letter-spacing: 0.03em;
       margin-bottom: 1rem;
     }
 
     .prog-desc {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 300;
       color: var(--stone-dark);
-      line-height: 1.8;
+      line-height: 2.0;
     }
 
     .prog-arrow {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      font-size: 0.62rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.72rem;
       font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
       color: var(--olive);
       margin-top: 2rem;
       opacity: 0;
@@ -680,10 +705,7 @@
                   transform 0.3s var(--ease-out);
     }
 
-    .prog-card:hover .prog-arrow {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    .prog-card:hover .prog-arrow { opacity: 1; transform: translateX(0); }
 
     /* ─── Apart ───────────────────────────────────────────── */
     #apart {
@@ -691,11 +713,7 @@
       border-bottom: 1px solid var(--divider);
     }
 
-    .apart-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    .apart-list { display: flex; flex-direction: column; gap: 0; }
 
     .apart-row {
       display: grid;
@@ -704,7 +722,7 @@
       align-items: baseline;
       padding: 2rem 0;
       border-bottom: 1px solid var(--divider-faint);
-      transition: background 0.3s var(--ease-out);
+      transition: background 0.3s var(--ease-out), padding 0.3s var(--ease-out);
     }
 
     .apart-row:first-child { border-top: 1px solid var(--divider-faint); }
@@ -719,18 +737,19 @@
     }
 
     .apart-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1rem;
       font-weight: 500;
       color: var(--charcoal);
-      line-height: 1.3;
+      line-height: 1.5;
+      letter-spacing: 0.03em;
     }
 
     .apart-desc {
       font-size: 0.88rem;
       font-weight: 300;
       color: var(--stone-dark);
-      line-height: 1.85;
+      line-height: 2.0;
     }
 
     /* ─── Vision & Mission ────────────────────────────────── */
@@ -747,30 +766,29 @@
     }
 
     .vm-col-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.62rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.68rem;
       font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      letter-spacing: 0.1em;
       color: var(--stone);
       margin-bottom: 2rem;
     }
 
     .vm-headline {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2.5rem);
       font-weight: 400;
       color: var(--charcoal);
-      line-height: 1.25;
+      line-height: 1.6;
+      letter-spacing: 0.03em;
       margin-bottom: 1.5rem;
     }
 
     .vm-body {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 300;
       color: var(--stone-dark);
-      line-height: 1.9;
+      line-height: 2.1;
     }
 
     .mission-items {
@@ -787,7 +805,7 @@
       display: grid;
       grid-template-columns: 1rem 1fr;
       gap: 0.8rem;
-      line-height: 1.7;
+      line-height: 1.85;
     }
 
     .mission-items li::before {
@@ -804,30 +822,26 @@
     }
 
     .sig-kicker {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
       color: var(--stone);
       margin-bottom: 3rem;
     }
 
     .sig-quote {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
+      font-family: 'Noto Serif SC', serif;
       font-weight: 400;
-      font-size: clamp(1.8rem, 4vw, 4.5rem);
-      line-height: 1.22;
+      font-size: clamp(1.6rem, 3.5vw, 4rem);
+      line-height: 1.7;
       color: var(--ivory);
-      max-width: 950px;
+      max-width: 900px;
       margin: 0 auto;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.04em;
     }
 
-    .sig-quote .emphasis {
-      color: var(--brass);
-    }
+    .sig-quote .emphasis { color: var(--brass); }
 
     .sig-rule {
       width: 2.5rem;
@@ -862,40 +876,38 @@
     }
 
     .footer-brand-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.6rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.62rem;
       font-weight: 300;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
+      letter-spacing: 0.1em;
       color: var(--stone);
       margin-bottom: 1.2rem;
     }
 
     .footer-tagline {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.95rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.9rem;
       color: var(--stone-dark);
-      line-height: 1.65;
+      line-height: 1.8;
+      letter-spacing: 0.03em;
       max-width: 260px;
     }
 
     .footer-col-head {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
       color: var(--olive);
       margin-bottom: 1.2rem;
     }
 
     .footer-col-body {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.88rem;
       font-weight: 300;
       color: var(--stone-dark);
-      line-height: 2.1;
+      line-height: 2.2;
     }
 
     .footer-col-body a {
@@ -905,10 +917,7 @@
     }
 
     .footer-col-body a:hover { color: var(--charcoal); }
-    .footer-col-body a:focus-visible {
-      outline: 1px solid var(--olive);
-      outline-offset: 2px;
-    }
+    .footer-col-body a:focus-visible { outline: 1px solid var(--olive); outline-offset: 2px; }
 
     .footer-bottom {
       display: flex;
@@ -917,9 +926,10 @@
     }
 
     .footer-copy {
-      font-size: 0.68rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.7rem;
       font-weight: 300;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       color: var(--stone);
     }
 
@@ -937,18 +947,13 @@
       .section { padding: 5rem 5vw; }
       #contact { padding: 5rem 5vw 2.5rem; }
 
-      .pos-grid,
-      .about-grid,
-      .vm-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .pos-grid, .about-grid, .vm-grid { grid-template-columns: 1fr; gap: 3rem; }
       .vm-grid .divider-v { display: none; }
-
       .philosophy-cols { grid-template-columns: 1fr; }
       .phil-col { border-right: none; border-bottom: 1px solid var(--divider); }
       .phil-col:last-child { border-bottom: none; }
-
       .apart-row { grid-template-columns: 2.5rem 1fr; gap: 1.2rem; }
       .apart-desc { grid-column: 2; }
-
       .contact-top { grid-template-columns: 1fr; gap: 2.5rem; }
     }
 
@@ -957,6 +962,7 @@
 
       #hero { padding: 96px 5vw 64px; }
       .hero-rule { width: 1.5rem; }
+      .hero-edition { display: none; }
       .hero-sub { max-width: 100%; }
       .hero-ctas { flex-direction: column; align-items: center; }
       .btn-primary,
@@ -966,7 +972,7 @@
         text-align: center;
         justify-content: center;
       }
-      .hero-headline { font-size: clamp(2.8rem, 12vw, 4rem); }
+      .hero-headline { font-size: clamp(2.2rem, 11vw, 3.2rem); }
 
       .prog-grid { grid-template-columns: 1fr; }
       .prog-card { border-right: none; border-bottom: 1px solid var(--divider); }
@@ -992,21 +998,21 @@
 <body>
 
   <!-- ═══ NAVIGATION ════════════════════════════════════════ -->
-  <nav id="nav" role="navigation" aria-label="Main navigation">
-    <a href="#hero" class="nav-logo" aria-label="Jaya Budi Education home">
+  <nav id="nav" role="navigation" aria-label="主导航">
+    <a href="#hero" class="nav-logo" aria-label="佳宝教育首页">
       <div class="nav-logo-name">Jaya Budi</div>
-      <div class="nav-logo-sub">Education</div>
+      <div class="nav-logo-sub">佳 宝 教 育</div>
     </a>
     <div class="nav-links">
-      <a href="#philosophy" class="nav-link">Philosophy</a>
-      <a href="#programmes" class="nav-link">Programmes</a>
-      <a href="#about"      class="nav-link">About</a>
-      <div style="display:flex;align-items:center;gap:0.4rem;">
-        <span style="font-family:'DM Sans',sans-serif;font-size:0.6rem;font-weight:500;letter-spacing:0.1em;color:var(--olive);">EN</span>
-        <span style="color:var(--divider);font-size:0.6rem;">|</span>
-        <a href="index-zh.html" style="font-family:'DM Sans',sans-serif;font-size:0.6rem;font-weight:400;letter-spacing:0.1em;color:var(--stone-dark);text-decoration:none;transition:color 0.25s;" onmouseover="this.style.color='var(--charcoal)'" onmouseout="this.style.color='var(--stone-dark)'">中文</a>
+      <a href="#philosophy" class="nav-link">理念</a>
+      <a href="#programmes" class="nav-link">方案</a>
+      <a href="#about"      class="nav-link">关于</a>
+      <div class="lang-toggle">
+        <a href="index.html" class="lang-toggle" style="text-decoration:none;">EN</a>
+        <span class="lang-sep">|</span>
+        <span class="lang-active">中文</span>
       </div>
-      <a href="#contact"    class="nav-cta-link">Connect</a>
+      <a href="#contact" class="nav-cta-link">联系</a>
     </div>
   </nav>
 
@@ -1016,155 +1022,158 @@
 
       <div class="hero-eyebrow">
         <div class="hero-rule" aria-hidden="true"></div>
-        <span class="label-xs">Est. 2025 · Kuala Lumpur</span>
+        <span class="label-xs">创立于 2025 · 吉隆坡</span>
         <div class="hero-rule" aria-hidden="true"></div>
       </div>
 
       <h1 id="hero-title" class="hero-headline">
-        Where Knowledge<br>
-        <em>Evolves Into Wisdom.</em>
+        让知识沉淀<br>
+        <span class="zh-italic">为智慧。</span>
       </h1>
 
       <div class="hero-divider" aria-hidden="true"></div>
 
       <p class="hero-sub">
-        We cultivate decision-makers, value creators, and leaders for an uncertain world.
+        于不确定的时代，培育决策者、价值创造者与思想领导者。
       </p>
 
       <div class="hero-ctas">
         <a href="#programmes" class="btn-primary">
-          Explore Our Programs
+          探索教育方案
           <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
             <path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a href="#contact" class="btn-ghost">Begin Your Journey</a>
+        <a href="#contact" class="btn-ghost">开启进阶之路</a>
       </div>
 
     </div>
+    <div class="hero-edition" aria-hidden="true">KL&thinsp;·&thinsp;2025</div>
     <div class="scroll-cue" aria-hidden="true">
+      <span class="scroll-label">向下</span>
       <div class="scroll-cue-line"></div>
     </div>
   </section>
 
-  <!-- ═══ BRAND POSITIONING ════════════════════════════════ -->
+  <!-- ═══ 定位 ══════════════════════════════════════════════ -->
   <section id="positioning" class="section" aria-labelledby="pos-title">
     <div class="section-label reveal">
       <div class="divider" style="max-width:2rem;"></div>
-      <span class="label-xs">Our Positioning</span>
+      <span class="label-xs">我们的定位</span>
     </div>
 
     <div class="pos-grid">
       <div class="reveal reveal-d1">
         <h2 id="pos-title" class="pos-headline">
-          <em>Not Just Education.</em><br>
-          A System of<br>Thinking.
+          这不只是教育。<br>
+          这是一套<br>
+          思维体系。
         </h2>
       </div>
 
       <div class="reveal reveal-d2">
         <p class="pos-body">
-          In a world overwhelmed by information, the true advantage lies in understanding — how to think, decide, and create value. We are not a traditional education provider. We design systems that shape how individuals perceive the world, make decisions, and build sustainable success.
+          在信息过载的时代，真正的优势在于理解力——懂得如何思考、决策与创造价值。我们不是传统的教育机构，我们设计的是思维系统，塑造个体的认知框架、决策逻辑与长期成就。
         </p>
-        <p class="pos-body" style="margin-bottom: 2rem;">Our work sits at the intersection of:</p>
+        <p class="pos-body" style="margin-bottom: 2rem;">我们的工作，交汇于以下四个领域：</p>
         <div class="pillars">
           <div class="pillar">
             <div class="pillar-num">01</div>
-            <div class="pillar-title">Human Nature</div>
+            <div class="pillar-title">人性洞察</div>
           </div>
           <div class="pillar">
             <div class="pillar-num">02</div>
-            <div class="pillar-title">Strategic Thinking</div>
+            <div class="pillar-title">战略思维</div>
           </div>
           <div class="pillar">
             <div class="pillar-num">03</div>
-            <div class="pillar-title">Value Creation</div>
+            <div class="pillar-title">价值创造</div>
           </div>
           <div class="pillar">
             <div class="pillar-num">04</div>
-            <div class="pillar-title">Long-term Decision Frameworks</div>
+            <div class="pillar-title">长期决策框架</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ PHILOSOPHY ════════════════════════════════════════ -->
+  <!-- ═══ 核心理念 ═══════════════════════════════════════════ -->
   <section id="philosophy" class="section" aria-labelledby="phil-title">
     <div class="section-label reveal">
       <div class="divider" style="max-width:2rem;"></div>
-      <span class="label-xs" id="phil-title">Core Philosophy</span>
+      <span class="label-xs" id="phil-title">核心理念</span>
     </div>
 
     <div class="philosophy-cols">
       <div class="phil-col reveal reveal-d1">
         <div class="phil-numeral" aria-hidden="true">I</div>
-        <h3 class="phil-title">Lifelong Learning</h3>
-        <p class="phil-desc">Growth is not an event — it is continuous and evolving. We build frameworks that sustain curiosity and adaptation across every stage of life.</p>
+        <h3 class="phil-title">终身学习</h3>
+        <p class="phil-desc">成长是持续不断的过程，而非某一时刻的事件。我们构建的框架，让好奇心与适应力在人生每个阶段持续生长。</p>
       </div>
       <div class="phil-col reveal reveal-d2">
         <div class="phil-numeral" aria-hidden="true">II</div>
-        <h3 class="phil-title">Uplifting Humanity</h3>
-        <p class="phil-desc">Education should elevate individuals and the communities they serve. We hold ourselves accountable not just to our students, but to the world they shape.</p>
+        <h3 class="phil-title">提升人类</h3>
+        <p class="phil-desc">教育不仅应造福个人，更应惠及他们所服务的社群。我们对学员负责，也对他们所塑造的世界负责。</p>
       </div>
       <div class="phil-col reveal reveal-d3">
         <div class="phil-numeral" aria-hidden="true">III</div>
-        <h3 class="phil-title">Continuing Wisdom</h3>
-        <p class="phil-desc">We bridge timeless wisdom with modern knowledge — honouring what endures while integrating what is emerging, so our students carry both forward.</p>
+        <h3 class="phil-title">延续智慧</h3>
+        <p class="phil-desc">我们连接永恒的智慧与现代知识——敬重那些经久不衰的洞见，同时融入新兴的认知，让两者共同延续。</p>
       </div>
     </div>
   </section>
 
-  <!-- ═══ ABOUT ═════════════════════════════════════════════ -->
+  <!-- ═══ 关于我们 ═══════════════════════════════════════════ -->
   <section id="about" class="section" aria-labelledby="about-title">
     <div class="section-label reveal">
       <div class="divider" style="max-width:2rem;"></div>
-      <span class="label-xs">Who We Are</span>
+      <span class="label-xs">关于我们</span>
     </div>
 
     <div class="about-grid">
       <div>
         <div class="about-left-number reveal" aria-hidden="true">01</div>
         <h2 id="about-title" class="about-tagline reveal reveal-d1">
-          A High-Level Education & Advisory Institution Dedicated to Human Potential.
+          致力于开发人类潜能的高端教育与顾问机构。
         </h2>
         <p class="about-body reveal reveal-d2">
-          We focus on cultivating clarity, judgment, and the capacity to navigate complexity. We don't simply teach knowledge — we engineer the conditions for wisdom to emerge in those ready to receive it.
+          我们专注于培养清晰的思维、精准的判断力与驾驭复杂环境的能力。我们不只是传授知识，更是创造让智慧得以生长的土壤。
         </p>
-        <p class="about-body reveal reveal-d3">We work with those who take their development seriously:</p>
+        <p class="about-body reveal reveal-d3">我们与认真对待自身成长的人合作：</p>
         <div class="audience-row reveal reveal-d4">
-          <span class="audience-chip">Entrepreneurs</span>
-          <span class="audience-chip">Leaders</span>
-          <span class="audience-chip">Professionals</span>
-          <span class="audience-chip">Next-Generation Talents</span>
+          <span class="audience-chip">创业者</span>
+          <span class="audience-chip">领导者</span>
+          <span class="audience-chip">专业人士</span>
+          <span class="audience-chip">新生代精英</span>
         </div>
       </div>
 
       <div class="about-right reveal reveal-d2">
         <blockquote class="about-right-quote">
-          "We do not simply teach knowledge — we engineer the conditions for wisdom to emerge."
+          "我们不只是传授知识——我们创造让智慧得以生长的土壤。"
         </blockquote>
         <p class="about-right-sub">
-          Our institution exists at the intersection of intellectual rigour and human depth. We believe that the highest form of education is one that changes not just what you know, but how you see.
+          我们相信，最高层次的教育，不仅改变你所知道的，更改变你所看见的方式。
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ═══ PROGRAMMES ════════════════════════════════════════ -->
+  <!-- ═══ 教育方案 ═══════════════════════════════════════════ -->
   <section id="programmes" class="section" aria-labelledby="prog-title">
     <div class="section-label reveal">
       <div class="divider" style="max-width:2rem;"></div>
-      <span class="label-xs" id="prog-title">Our Programmes</span>
+      <span class="label-xs" id="prog-title">教育方案</span>
     </div>
 
     <div class="prog-grid">
       <div class="prog-card reveal reveal-d1">
         <div class="prog-num">01</div>
-        <h3 class="prog-title">Foundational Programmes</h3>
-        <p class="prog-desc">Core frameworks for first-principles thinking, mental models, and decision literacy.</p>
+        <h3 class="prog-title">基础方案</h3>
+        <p class="prog-desc">思维第一原则、心智模型与决策素养的核心框架。</p>
         <div class="prog-arrow" aria-hidden="true">
-          Enquire
+          深入了解
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path d="M1 4h10M7 1l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
           </svg>
@@ -1173,10 +1182,10 @@
 
       <div class="prog-card reveal reveal-d2">
         <div class="prog-num">02</div>
-        <h3 class="prog-title">Advanced Programmes</h3>
-        <p class="prog-desc">Deep-dive mastery in strategy, value creation, and complex judgement under uncertainty.</p>
+        <h3 class="prog-title">进阶方案</h3>
+        <p class="prog-desc">战略思维、价值创造与不确定性下复杂判断的深度掌握。</p>
         <div class="prog-arrow" aria-hidden="true">
-          Enquire
+          深入了解
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path d="M1 4h10M7 1l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
           </svg>
@@ -1185,10 +1194,10 @@
 
       <div class="prog-card reveal reveal-d3">
         <div class="prog-num">03</div>
-        <h3 class="prog-title">Executive & Leadership Programmes</h3>
-        <p class="prog-desc">For senior leaders navigating scale, uncertainty, and long-horizon decisions.</p>
+        <h3 class="prog-title">高管与领导力方案</h3>
+        <p class="prog-desc">为正在驾驭规模、不确定性与长远决策的资深领导者而设。</p>
         <div class="prog-arrow" aria-hidden="true">
-          Enquire
+          深入了解
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path d="M1 4h10M7 1l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
           </svg>
@@ -1197,10 +1206,10 @@
 
       <div class="prog-card reveal reveal-d4">
         <div class="prog-num">04</div>
-        <h3 class="prog-title">Youth & Next-Generation Programmes</h3>
-        <p class="prog-desc">Building tomorrow's thinkers — before the world shapes them otherwise.</p>
+        <h3 class="prog-title">青年与新生代方案</h3>
+        <p class="prog-desc">在世界塑造他们之前，先塑造明日的思想者。</p>
         <div class="prog-arrow" aria-hidden="true">
-          Enquire
+          深入了解
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path d="M1 4h10M7 1l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
           </svg>
@@ -1209,115 +1218,114 @@
     </div>
   </section>
 
-  <!-- ═══ WHAT SETS US APART ════════════════════════════════ -->
+  <!-- ═══ 我们的独特之处 ════════════════════════════════════ -->
   <section id="apart" class="section" aria-labelledby="apart-title">
     <div class="section-label reveal">
       <div class="divider" style="max-width:2rem;"></div>
-      <span class="label-xs" id="apart-title">What Sets Us Apart</span>
+      <span class="label-xs" id="apart-title">我们的独特之处</span>
     </div>
 
     <div class="apart-list">
       <div class="apart-row reveal reveal-d1">
         <span class="apart-index">01</span>
-        <h3 class="apart-title">Principles, Not Content</h3>
-        <p class="apart-desc">We teach the underlying logic of how things work — not facts to memorise, but principles to apply across any domain, at any scale, in any era.</p>
+        <h3 class="apart-title">原则，而非内容</h3>
+        <p class="apart-desc">我们传授的是事物运作的底层逻辑——不是待记忆的知识点，而是可跨领域、跨时代应用的原则。</p>
       </div>
       <div class="apart-row reveal reveal-d2">
         <span class="apart-index">02</span>
-        <h3 class="apart-title">Decision-Making as a Core Discipline</h3>
-        <p class="apart-desc">Every programme is architected around improving the quality of decisions — the single most consequential lever in any life, career, or organisation.</p>
+        <h3 class="apart-title">以决策力为核心</h3>
+        <p class="apart-desc">每套方案均以提升决策质量为核心——这是个人、职业生涯乃至组织最关键的杠杆。</p>
       </div>
       <div class="apart-row reveal reveal-d3">
         <span class="apart-index">03</span>
-        <h3 class="apart-title">Non-Depreciating Capabilities</h3>
-        <p class="apart-desc">We build capabilities that compound over time and never become obsolete — wisdom, judgment, and clarity of thinking are the only true durable assets.</p>
+        <h3 class="apart-title">不会贬值的能力</h3>
+        <p class="apart-desc">我们培养的是随时间复利、永不过时的能力——智慧、判断力与清晰的思维。</p>
       </div>
       <div class="apart-row reveal reveal-d4">
         <span class="apart-index">04</span>
-        <h3 class="apart-title">Wisdom Integrated with Modern Frameworks</h3>
-        <p class="apart-desc">Timeless insight woven with contemporary frameworks — so you carry the best of both into an uncertain future that demands more than knowledge alone.</p>
+        <h3 class="apart-title">智慧融合现代框架</h3>
+        <p class="apart-desc">将永恒的洞见与当代框架融为一体，让你在充满不确定性的未来中以最好的状态前行。</p>
       </div>
     </div>
   </section>
 
-  <!-- ═══ VISION & MISSION ══════════════════════════════════ -->
+  <!-- ═══ 愿景与使命 ═════════════════════════════════════════ -->
   <section id="vision" class="section" aria-labelledby="vision-title">
     <div class="section-label reveal">
       <div class="divider" style="max-width:2rem;"></div>
-      <span class="label-xs">Vision &amp; Mission</span>
+      <span class="label-xs">愿景与使命</span>
     </div>
 
     <div class="vm-grid">
       <div class="reveal reveal-d1">
-        <div class="vm-col-label">Vision</div>
+        <div class="vm-col-label">愿景</div>
         <h2 id="vision-title" class="vm-headline">
-          To shape a future where individuals think clearly and act wisely.
+          塑造一个让每个人都能清晰思考、明智行动的未来。
         </h2>
         <p class="vm-body">
-          We measure our success not by enrolment numbers or examination results, but by the quality of decisions our graduates make — and the lives those decisions build over time.
+          我们衡量成功的标准，不是入学人数或考试成绩，而是学员的决策质量——以及这些决策所构建的人生。
         </p>
       </div>
 
       <div class="divider-v reveal reveal-d2"></div>
 
       <div class="reveal reveal-d3">
-        <div class="vm-col-label">Mission</div>
+        <div class="vm-col-label">使命</div>
         <ul class="mission-items">
-          <li>Cultivate lifelong learners who grow beyond any single programme</li>
-          <li>Elevate human potential through structured, principled education</li>
-          <li>Integrate timeless wisdom with modern knowledge frameworks</li>
-          <li>Empower individuals to make better decisions at every scale</li>
+          <li>培育在任何方案之外仍持续成长的终身学习者</li>
+          <li>通过有原则、有体系的教育，提升人类潜能</li>
+          <li>将永恒智慧与现代知识框架融合贯通</li>
+          <li>赋能个人在各个层面做出更高质量的决策</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ═══ SIGNATURE STATEMENT ═══════════════════════════════ -->
-  <section id="signature" aria-label="Signature statement">
+  <!-- ═══ 核心承诺 ═══════════════════════════════════════════ -->
+  <section id="signature" aria-label="核心承诺">
     <div class="reveal">
-      <p class="sig-kicker">Our Commitment</p>
+      <p class="sig-kicker">我们的承诺</p>
       <blockquote class="sig-quote">
-        "We do not prepare people for exams. We prepare them for <span class="emphasis">life, decisions,</span> and reality."
+        「我们不为应试而教，而为<span class="emphasis">人生、决策</span>与现实而育。」
       </blockquote>
       <div class="sig-rule" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- ═══ CONTACT / FOOTER ══════════════════════════════════ -->
-  <footer id="contact" aria-label="Contact and footer information">
+  <!-- ═══ 联系我们 ═══════════════════════════════════════════ -->
+  <footer id="contact" aria-label="联系与页脚信息">
     <div class="contact-top">
       <div class="reveal reveal-d1">
         <div class="footer-brand-name">Jaya Budi</div>
-        <div class="footer-brand-sub">Education Sdn. Bhd.</div>
-        <p class="footer-tagline">Not Just Education.<br>A System of Thinking.</p>
+        <div class="footer-brand-sub">教育私人有限公司</div>
+        <p class="footer-tagline">不止教育。<br>这是一套思维体系。</p>
       </div>
 
       <div class="reveal reveal-d2">
-        <div class="footer-col-head">Connect</div>
+        <div class="footer-col-head">联系方式</div>
         <div class="footer-col-body">
           <a href="mailto:info@jayabudi.com">info@jayabudi.com</a>
         </div>
       </div>
 
       <div class="reveal reveal-d3">
-        <div class="footer-col-head">Registered In</div>
+        <div class="footer-col-head">注册地址</div>
         <div class="footer-col-body">
-          Kuala Lumpur, Malaysia<br>
-          Reg. No. 202501056407<br>
+          吉隆坡，马来西亚<br>
+          注册号 202501056407<br>
           (1657813-M)
         </div>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span class="footer-copy">© 2025 Jaya Budi Education Sdn. Bhd. All rights reserved.</span>
+      <span class="footer-copy">© 2025 Jaya Budi Education Sdn. Bhd. 版权所有</span>
       <span class="footer-copy">202501056407 (1657813-M)</span>
     </div>
   </footer>
 
   <!-- ═══ JAVASCRIPT ════════════════════════════════════════ -->
   <script>
-    // ── Scroll Reveal via IntersectionObserver ───────────
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1330,14 +1338,12 @@
 
     reveals.forEach(el => io.observe(el));
 
-    // ── Smooth anchor scroll ─────────────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const target = document.querySelector(a.getAttribute('href'));
         if (target) {
           e.preventDefault();
-          const offset = 64; // nav height
-          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          const top = target.getBoundingClientRect().top + window.scrollY - 64;
           window.scrollTo({ top, behavior: 'smooth' });
         }
       });
