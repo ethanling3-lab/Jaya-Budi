@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600&family=Noto+Sans+SC:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700&family=Noto+Sans+SC:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet" />
 
   <style>
     /* ─── Design Tokens ───────────────────────────────────── */
@@ -39,7 +39,7 @@
       background-color: var(--ivory);
       color: var(--charcoal);
       font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 2.0;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -61,6 +61,7 @@
     /* ─── Chinese Typography Overrides ───────────────────── */
     h1, h2, h3 {
       font-family: 'Noto Serif SC', 'Playfair Display', serif;
+      font-weight: 500;
       line-height: 1.4;
       letter-spacing: 0.04em;
     }
@@ -71,10 +72,10 @@
 
     .label-xs {
       font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;   /* reduced — Chinese doesn't need 0.22em */
-      color: var(--olive);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--charcoal);
     }
 
     /* ─── Dividers ────────────────────────────────────────── */
@@ -446,8 +447,8 @@
 
     .pos-headline {
       font-family: 'Noto Serif SC', serif;
-      font-weight: 400;
-      font-size: clamp(1.8rem, 3.5vw, 3.8rem);
+      font-weight: 500;
+      font-size: clamp(2.2rem, 4vw, 4.5rem);
       line-height: 1.45;
       letter-spacing: 0.04em;
       color: var(--charcoal);
@@ -534,8 +535,8 @@
 
     .phil-title {
       font-family: 'Noto Serif SC', serif;
-      font-size: 1.15rem;
-      font-weight: 500;
+      font-size: 1.35rem;
+      font-weight: 600;
       color: var(--charcoal);
       margin-bottom: 1rem;
       line-height: 1.5;
@@ -574,8 +575,8 @@
 
     .about-tagline {
       font-family: 'Noto Serif SC', serif;
-      font-size: clamp(1.4rem, 2.5vw, 2.5rem);
-      font-weight: 400;
+      font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+      font-weight: 500;
       color: var(--charcoal);
       line-height: 1.6;
       letter-spacing: 0.03em;
