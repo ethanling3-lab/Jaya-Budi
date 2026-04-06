@@ -166,18 +166,27 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      text-decoration: none;
+    }
+
+    .lang-en {
       font-family: 'DM Sans', sans-serif;
       font-size: 0.6rem;
       font-weight: 400;
       letter-spacing: 0.12em;
       color: var(--stone);
-      text-decoration: none;
     }
 
-    .lang-toggle .lang-active {
-      color: var(--olive);
-      font-weight: 500;
+    .lang-zh {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--stone);
     }
+
+    .lang-active-en { color: var(--olive); font-weight: 500; }
+    .lang-active-zh { color: var(--olive); font-weight: 500; }
 
     .lang-sep {
       color: var(--divider);
@@ -1009,9 +1018,9 @@
       <a href="#programmes" class="nav-link">方案</a>
       <a href="#about"      class="nav-link">关于</a>
       <div class="lang-toggle">
-        <a href="index.html" class="lang-toggle" style="text-decoration:none;">EN</a>
+        <a href="index.html" class="lang-en" style="text-decoration:none;">EN</a>
         <span class="lang-sep">|</span>
-        <span class="lang-active">中文</span>
+        <span class="lang-zh lang-active-zh">中文</span>
       </div>
       <a href="#contact" class="nav-cta-link">联系</a>
     </div>
