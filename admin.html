@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaya Budi — Leads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ivory:       #F6F4EF;
+      --ivory-dark:  #ECEAE4;
+      --charcoal:    #1F1F1F;
+      --charcoal-2:  #2E2E2E;
+      --stone:       #B8B2A7;
+      --stone-dark:  #8A847A;
+      --olive:       #6E6A4F;
+      --olive-light: rgba(110,106,79,0.1);
+      --divider:     #D8D2C6;
+      --surface:     #EFECEA;
+      --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+
+      /* Status colors */
+      --s-new:          #5B8A6E;
+      --s-consultation: #6A6E8A;
+      --s-proposal:     #8A7B5B;
+      --s-enrolled:     #6E6A4F;
+      --s-alumni:       #8A847A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 15px; }
+
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9990;
+    }
+
+    /* ─── Login Screen ──────────────────────────────────────── */
+    #loginScreen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--ivory);
+      z-index: 1000;
+      padding: 2rem;
+    }
+
+    #loginScreen.hidden { display: none; }
+
+    .login-box {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .login-rule {
+      width: 2rem;
+      height: 1px;
+      background: var(--olive);
+      margin-bottom: 1.5rem;
+    }
+
+    .login-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+      color: var(--charcoal);
+    }
+
+    .login-sub {
+      font-size: 0.78rem;
+      color: var(--stone-dark);
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .login-label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .login-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--divider);
+      padding: 0.45rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      outline: none;
+      margin-bottom: 1.8rem;
+      transition: border-color 0.25s var(--ease-out);
+    }
+
+    .login-input:focus { border-bottom-color: var(--charcoal); }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--charcoal);
+      color: var(--ivory);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.25s;
+    }
+
+    .login-btn:hover { opacity: 0.82; }
+    .login-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .login-err {
+      margin-top: 0.9rem;
+      font-size: 0.75rem;
+      color: #b94040;
+      text-align: center;
+    }
+
+    /* ─── Main App ──────────────────────────────────────────── */
+    #app { display: none; }
+    #app.visible { display: block; }
+
+    /* ─── Header ────────────────────────────────────────────── */
+    .app-header {
+      border-bottom: 1px solid var(--divider);
+      padding: 0 4vw;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: rgba(246,244,239,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .header-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .header-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+
+    .header-brand-sub {
+      font-size: 0.56rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-meta {
+      font-size: 0.72rem;
+      color: var(--stone-dark);
+      letter-spacing: 0.04em;
+    }
+
+    .header-logout {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      font-family: 'DM Sans', sans-serif;
+      transition: color 0.2s;
+      padding: 0;
+    }
+
+    .header-logout:hover { color: var(--charcoal); }
+
+    /* ─── Stats Bar ─────────────────────────────────────────── */
+    .stats-bar {
+      display: flex;
+      border-bottom: 1px solid var(--divider);
+      padding: 0 4vw;
+    }
+
+    .stat-item {
+      padding: 1.1rem 2.5rem 1.1rem 0;
+      margin-right: 2.5rem;
+      border-right: 1px solid var(--divider);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+    }
+
+    /* ─── Filter Tabs ───────────────────────────────────────── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 4vw;
+      border-bottom: 1px solid var(--divider);
+      overflow-x: auto;
+    }
+
+    .filter-tab {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.9rem 1.4rem 0.85rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      margin-bottom: -1px;
+    }
+
+    .filter-tab:hover { color: var(--charcoal); }
+
+    .filter-tab.active {
+      color: var(--charcoal);
+      border-bottom-color: var(--olive);
+    }
+
+    /* ─── Lead Table ────────────────────────────────────────── */
+    .leads-container {
+      padding: 0 4vw 4rem;
+    }
+
+    .leads-empty {
+      padding: 4rem 0;
+      text-align: center;
+      color: var(--stone-dark);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+    }
+
+    .lead-row {
+      border-bottom: 1px solid var(--divider-faint, rgba(216,210,198,0.5));
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .lead-row:hover { background: var(--ivory-dark); }
+    .lead-row.expanded { background: var(--surface); }
+
+    .lead-main {
+      display: grid;
+      grid-template-columns: 2fr 2fr 1.5fr 1.2fr 1fr 1.2fr;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .lead-cell {
+      font-size: 0.82rem;
+      color: var(--charcoal-2);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .lead-cell-head {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+    }
+
+    .lead-name {
+      font-weight: 400;
+      color: var(--charcoal);
+    }
+
+    .lead-date {
+      font-size: 0.75rem;
+      color: var(--stone-dark);
+    }
+
+    /* Status badge */
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .status-dot::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status-dot[data-s="New"]::before          { background: var(--s-new); }
+    .status-dot[data-s="Consultation"]::before { background: var(--s-consultation); }
+    .status-dot[data-s="Proposal"]::before     { background: var(--s-proposal); }
+    .status-dot[data-s="Enrolled"]::before     { background: var(--s-enrolled); }
+    .status-dot[data-s="Alumni"]::before       { background: var(--s-alumni); }
+
+    /* Expand toggle */
+    .lead-toggle {
+      text-align: right;
+    }
+
+    .lead-toggle-icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--divider);
+      border-radius: 50%;
+      color: var(--stone-dark);
+      font-size: 0.7rem;
+      line-height: 16px;
+      text-align: center;
+      transition: transform 0.25s var(--ease-out), border-color 0.2s;
+    }
+
+    .lead-row.expanded .lead-toggle-icon {
+      transform: rotate(180deg);
+      border-color: var(--stone);
+    }
+
+    /* ─── Expanded Detail Panel ─────────────────────────────── */
+    .lead-detail {
+      display: none;
+      border-top: 1px solid var(--divider);
+      padding: 1.5rem 0 1.8rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .lead-row.expanded .lead-detail { display: grid; }
+
+    .detail-group { }
+
+    .detail-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .detail-value {
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+
+    .detail-value a {
+      color: var(--olive);
+      text-decoration: none;
+    }
+
+    .detail-value a:hover { text-decoration: underline; }
+
+    /* Status select */
+    .status-select {
+      background: transparent;
+      border: 1px solid var(--divider);
+      padding: 0.35rem 0.7rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      border-radius: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238A847A' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      padding-right: 1.8rem;
+    }
+
+    .status-select:focus { border-color: var(--charcoal); }
+
+    /* Notes textarea */
+    .notes-textarea {
+      width: 100%;
+      background: var(--ivory);
+      border: 1px solid var(--divider);
+      padding: 0.6rem 0.8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      outline: none;
+      resize: vertical;
+      min-height: 72px;
+      line-height: 1.6;
+      transition: border-color 0.2s;
+      border-radius: 0;
+    }
+
+    .notes-textarea:focus { border-color: var(--charcoal); }
+
+    .save-btn {
+      margin-top: 0.6rem;
+      padding: 0.5rem 1.2rem;
+      background: var(--charcoal);
+      color: var(--ivory);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .save-btn:hover { opacity: 0.82; }
+    .save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .save-status {
+      display: inline-block;
+      margin-left: 0.7rem;
+      font-size: 0.72rem;
+      color: var(--olive);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .save-status.show { opacity: 1; }
+
+    /* ─── Table Header ──────────────────────────────────────── */
+    .table-header {
+      display: grid;
+      grid-template-columns: 2fr 2fr 1.5fr 1.2fr 1fr 1.2fr;
+      gap: 1rem;
+      padding: 1.4rem 0 0.7rem;
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 0;
+    }
+
+    /* ─── Loading ───────────────────────────────────────────── */
+    .loading {
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--stone-dark);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 900px) {
+      .lead-main, .table-header {
+        grid-template-columns: 2fr 2fr 1.2fr 1fr;
+      }
+      .lead-cell:nth-child(3),
+      .table-header .lead-cell-head:nth-child(3) { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .app-header { padding: 0 5vw; }
+      .stats-bar { padding: 0 5vw; overflow-x: auto; }
+      .filter-bar { padding: 0 5vw; }
+      .leads-container { padding: 0 5vw 3rem; }
+      .lead-main, .table-header {
+        grid-template-columns: 2fr 1.5fr 1fr;
+      }
+      .lead-cell:nth-child(2),
+      .table-header .lead-cell-head:nth-child(2) { display: none; }
+      .lead-detail { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ LOGIN SCREEN ══════════════════════════════════════════ -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <div class="login-rule"></div>
+      <h1 class="login-title">Jaya Budi</h1>
+      <p class="login-sub">Leads Dashboard · Restricted Access</p>
+      <label class="login-label" for="pwInput">Password</label>
+      <input class="login-input" id="pwInput" type="password" autocomplete="current-password" />
+      <button class="login-btn" id="loginBtn" onclick="handleLogin()">Enter</button>
+      <p class="login-err" id="loginErr"></p>
+    </div>
+  </div>
+
+  <!-- ═══ MAIN APP ══════════════════════════════════════════════ -->
+  <div id="app">
+
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="header-brand-name">Jaya Budi</div>
+        <div class="header-brand-sub">Leads Dashboard</div>
+      </div>
+      <div class="header-right">
+        <span class="header-meta" id="lastRefresh"></span>
+        <button class="header-logout" onclick="handleLogout()">Sign Out</button>
+      </div>
+    </header>
+
+    <div class="stats-bar" id="statsBar">
+      <div class="stat-item">
+        <div class="stat-num" id="statTotal">—</div>
+        <div class="stat-label">Total Leads</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="statNew">—</div>
+        <div class="stat-label">New</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="statConsult">—</div>
+        <div class="stat-label">Consultation</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="statEnrolled">—</div>
+        <div class="stat-label">Enrolled</div>
+      </div>
+    </div>
+
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-tab active" data-filter="All" onclick="setFilter('All', this)">All</button>
+      <button class="filter-tab" data-filter="New" onclick="setFilter('New', this)">New</button>
+      <button class="filter-tab" data-filter="Consultation" onclick="setFilter('Consultation', this)">Consultation</button>
+      <button class="filter-tab" data-filter="Proposal" onclick="setFilter('Proposal', this)">Proposal</button>
+      <button class="filter-tab" data-filter="Enrolled" onclick="setFilter('Enrolled', this)">Enrolled</button>
+      <button class="filter-tab" data-filter="Alumni" onclick="setFilter('Alumni', this)">Alumni</button>
+    </div>
+
+    <div class="leads-container">
+      <div class="loading" id="loadingMsg">Loading…</div>
+      <div id="leadsTable" style="display:none;">
+        <div class="table-header">
+          <div class="lead-cell-head">Name</div>
+          <div class="lead-cell-head">Email</div>
+          <div class="lead-cell-head">Phone</div>
+          <div class="lead-cell-head">Programme</div>
+          <div class="lead-cell-head">Date</div>
+          <div class="lead-cell-head">Status</div>
+        </div>
+        <div id="leadsList"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ JAVASCRIPT ════════════════════════════════════════════ -->
+  <script>
+    let allLeads   = [];
+    let activeFilter = 'All';
+    let adminPw    = '';
+
+    // ── Auth ──────────────────────────────────────────────────
+    function handleLogin() {
+      const pw  = document.getElementById('pwInput').value;
+      const btn = document.getElementById('loginBtn');
+      const err = document.getElementById('loginErr');
+
+      if (!pw) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Verifying…';
+      err.textContent = '';
+
+      // Verify by attempting a real API call
+      fetch('/.netlify/functions/get-leads', {
+        headers: { 'X-Admin-Password': pw }
+      })
+      .then(res => {
+        if (res.status === 401) throw new Error('Incorrect password.');
+        if (!res.ok) throw new Error('Server error. Try again.');
+        return res.json();
+      })
+      .then(leads => {
+        adminPw = pw;
+        sessionStorage.setItem('jb_admin_pw', pw);
+        allLeads = leads;
+        showApp();
+        renderLeads();
+        updateStats();
+        updateRefreshTime();
+      })
+      .catch(e => {
+        err.textContent = e.message;
+        btn.disabled = false;
+        btn.textContent = 'Enter';
+      });
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem('jb_admin_pw');
+      adminPw = '';
+      allLeads = [];
+      document.getElementById('app').classList.remove('visible');
+      document.getElementById('loginScreen').classList.remove('hidden');
+      document.getElementById('pwInput').value = '';
+    }
+
+    document.getElementById('pwInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleLogin();
+    });
+
+    // ── Auto-login from session ─────────────────────────────
+    const savedPw = sessionStorage.getItem('jb_admin_pw');
+    if (savedPw) {
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('app').classList.add('visible');
+      adminPw = savedPw;
+      loadLeads();
+    }
+
+    function showApp() {
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('app').classList.add('visible');
+    }
+
+    // ── Load Leads ─────────────────────────────────────────
+    function loadLeads() {
+      document.getElementById('loadingMsg').style.display = 'block';
+      document.getElementById('leadsTable').style.display = 'none';
+
+      fetch('/.netlify/functions/get-leads', {
+        headers: { 'X-Admin-Password': adminPw }
+      })
+      .then(res => {
+        if (res.status === 401) { handleLogout(); throw new Error('Session expired.'); }
+        if (!res.ok) throw new Error('Failed to load leads.');
+        return res.json();
+      })
+      .then(leads => {
+        allLeads = leads;
+        renderLeads();
+        updateStats();
+        updateRefreshTime();
+        document.getElementById('loadingMsg').style.display = 'none';
+        document.getElementById('leadsTable').style.display = 'block';
+      })
+      .catch(err => {
+        document.getElementById('loadingMsg').textContent = err.message;
+      });
+    }
+
+    function updateRefreshTime() {
+      const now = new Date().toLocaleTimeString('en-MY', { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('lastRefresh').textContent = `Refreshed ${now}`;
+    }
+
+    // ── Stats ─────────────────────────────────────────────
+    function updateStats() {
+      document.getElementById('statTotal').textContent   = allLeads.length;
+      document.getElementById('statNew').textContent     = allLeads.filter(l => l.status === 'New').length;
+      document.getElementById('statConsult').textContent = allLeads.filter(l => l.status === 'Consultation').length;
+      document.getElementById('statEnrolled').textContent= allLeads.filter(l => l.status === 'Enrolled').length;
+    }
+
+    // ── Filter ────────────────────────────────────────────
+    function setFilter(filter, el) {
+      activeFilter = filter;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      renderLeads();
+    }
+
+    // ── Render ────────────────────────────────────────────
+    function renderLeads() {
+      const filtered = activeFilter === 'All'
+        ? allLeads
+        : allLeads.filter(l => l.status === activeFilter);
+
+      const list = document.getElementById('leadsList');
+      list.innerHTML = '';
+
+      if (!filtered.length) {
+        list.innerHTML = '<div class="leads-empty">No leads in this category.</div>';
+        return;
+      }
+
+      filtered.forEach(lead => {
+        const row = document.createElement('div');
+        row.className = 'lead-row';
+        row.dataset.id = lead.id;
+
+        const date = new Date(lead.created_at).toLocaleDateString('en-MY', {
+          day: 'numeric', month: 'short', year: 'numeric'
+        });
+
+        const langFlag = lead.language === 'zh' ? ' 🇨🇳' : '';
+
+        row.innerHTML = `
+          <div class="lead-main" onclick="toggleRow(this.parentElement)">
+            <div class="lead-cell lead-name">${esc(lead.name)}${langFlag}</div>
+            <div class="lead-cell">${esc(lead.email)}</div>
+            <div class="lead-cell">${esc(lead.phone)}</div>
+            <div class="lead-cell">${esc(lead.programme || '—')}</div>
+            <div class="lead-cell lead-date">${date}</div>
+            <div class="lead-cell" style="display:flex;align-items:center;justify-content:space-between;">
+              <span class="status-dot" data-s="${esc(lead.status)}">${esc(lead.status)}</span>
+              <span class="lead-toggle-icon">↓</span>
+            </div>
+          </div>
+          <div class="lead-detail">
+            <div>
+              <div class="detail-group" style="margin-bottom:1.2rem;">
+                <div class="detail-label">Contact</div>
+                <div class="detail-value">
+                  <a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a><br>
+                  <a href="https://wa.me/${lead.phone.replace(/[^0-9]/g,'')}" target="_blank">${esc(lead.phone)}</a>
+                </div>
+              </div>
+              <div class="detail-group" style="margin-bottom:1.2rem;">
+                <div class="detail-label">Programme</div>
+                <div class="detail-value">${esc(lead.programme || 'No Preference')}</div>
+              </div>
+              ${lead.message ? `
+              <div class="detail-group">
+                <div class="detail-label">Message</div>
+                <div class="detail-value">${esc(lead.message)}</div>
+              </div>` : ''}
+            </div>
+            <div>
+              <div class="detail-group" style="margin-bottom:1.2rem;">
+                <div class="detail-label">Status</div>
+                <select class="status-select" data-id="${esc(lead.id)}" onchange="updateStatus(this)">
+                  ${['New','Consultation','Proposal','Enrolled','Alumni']
+                    .map(s => `<option value="${s}"${s === lead.status ? ' selected' : ''}>${s}</option>`)
+                    .join('')}
+                </select>
+              </div>
+              <div class="detail-group">
+                <div class="detail-label">Notes</div>
+                <textarea class="notes-textarea" data-id="${esc(lead.id)}">${esc(lead.notes || '')}</textarea>
+                <div>
+                  <button class="save-btn" onclick="saveNotes(this)">Save Notes</button>
+                  <span class="save-status" id="saved-${esc(lead.id)}">Saved</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        list.appendChild(row);
+      });
+    }
+
+    function toggleRow(row) {
+      row.classList.toggle('expanded');
+    }
+
+    // ── Update Status ─────────────────────────────────────
+    function updateStatus(select) {
+      const id     = select.dataset.id;
+      const status = select.value;
+
+      // Update local cache
+      const lead = allLeads.find(l => l.id === id);
+      if (lead) lead.status = status;
+
+      // Update the status dot in the main row
+      const row = select.closest('.lead-row');
+      const dot = row.querySelector('.status-dot');
+      if (dot) { dot.textContent = status; dot.dataset.s = status; }
+
+      fetch('/.netlify/functions/update-lead', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Password': adminPw
+        },
+        body: JSON.stringify({ id, status })
+      })
+      .then(res => { if (!res.ok) throw new Error(); })
+      .catch(() => alert('Failed to update status. Please try again.'));
+    }
+
+    // ── Save Notes ────────────────────────────────────────
+    function saveNotes(btn) {
+      const container = btn.closest('.detail-group').previousElementSibling
+                          .previousElementSibling.nextElementSibling;
+      // Find the textarea in the same detail panel
+      const detail  = btn.closest('.lead-detail');
+      const textarea = detail.querySelector('.notes-textarea');
+      const id       = textarea.dataset.id;
+      const notes    = textarea.value;
+
+      btn.disabled = true;
+
+      fetch('/.netlify/functions/update-lead', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Password': adminPw
+        },
+        body: JSON.stringify({ id, notes })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error();
+        const savedEl = document.getElementById(`saved-${id}`);
+        if (savedEl) {
+          savedEl.classList.add('show');
+          setTimeout(() => savedEl.classList.remove('show'), 2500);
+        }
+        const lead = allLeads.find(l => l.id === id);
+        if (lead) lead.notes = notes;
+      })
+      .catch(() => alert('Failed to save notes.'))
+      .finally(() => { btn.disabled = false; });
+    }
+
+    // ── Utility ───────────────────────────────────────────
+    function esc(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+
+</body>
+</html>
